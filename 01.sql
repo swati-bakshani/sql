@@ -14,7 +14,7 @@ INSERT into Transaction_Tbl (CustID, TranID, TranAmt, TranDate) VALUES (1002, 30
 INSERT into Transaction_Tbl (CustID, TranID, TranAmt, TranDate) VALUES (1002, 30002, 15000, CAST('2020-04-25' AS Date));
 INSERT into Transaction_Tbl (CustID, TranID, TranAmt, TranDate) VALUES (1002, 30003, 22000, CAST('2020-04-25' AS Date));
 
-
+-- below is the answer
 WITH CTE AS
 (
 SELECT custID, tranID, TranAmt FROM transaction_tbl
