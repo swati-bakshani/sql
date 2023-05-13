@@ -13,7 +13,7 @@ insert into studentinfo values ('Tom',83,80,92);
 --studentname,english,maths,science
 --David,85,90,88
 --John,75,85,80
---Tom,83,80,92
+--Tom,83,80,92.
 
 --answer
 SELECT studentname,'english' AS 'subjects',english as 'marks' FROM studentinfo
