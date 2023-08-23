@@ -18,8 +18,9 @@ with running_total_cte as(
 select *, sum(salary) over (partition by positions order by salary,id) as running_total
 from candidates
 ),
+-- null handling using coalesce
 senior_cte as(
-select count(*) as senior, sum(salary) as s_salary
+select count(*) as senior, coalesce(sum(salary),0) as s_salary
 from running_total_cte
 where positions = 'senior'
 and running_total<= 50000
@@ -36,3 +37,31 @@ and running_total<= 50000-(select s_salary from senior_cte)
 
 select junior,senior
 from junior_cte,senior_cte
+
+--test case 2:
+delete from candidates;
+insert into candidates values(20,'junior',10000);
+insert into candidates values(30,'senior',15000);
+insert into candidates values(40,'senior',30000);
+
+select * from candidates
+
+--test case 3:
+delete from candidates;
+
+insert into candidates values(1,'junior',15000);
+insert into candidates values(2,'junior',15000);
+insert into candidates values(3,'junior',20000);
+insert into candidates values(4,'senior',60000);
+
+select * from candidates
+
+--test case 4:
+delete from candidates;
+	select * from candidates
+insert into candidates values(10,'junior',10000);
+insert into candidates values(40,'junior',10000);
+insert into candidates values(20,'senior',15000);
+insert into candidates values(30,'senior',30000);
+insert into candidates values(50,'senior',15000);
+
